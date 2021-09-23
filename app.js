@@ -22,10 +22,15 @@ const Food = mongoose.model('Food', foodSchema);
 
 
 app.get('/', function(req, res) {
-    Food.find({}, (err, result) => {
-        res.sendFile('index.html', {root: __dirname })
-    })
+    res.sendFile('index.html');
 });
+
+app.get('/foods', function(req, res) {
+    
+    Food.find({}, (err, result) => {
+        res.send(result);
+    })
+})
 
 app.post('/submit' , (req , res)=>{
 
