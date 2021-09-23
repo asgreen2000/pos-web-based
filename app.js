@@ -54,4 +54,4 @@ app.post('/submit' , (req , res)=>{
     )
 });
 
-app.listen(process.env.PORT | 3000, () => console.log("The server ran!"));
+app.listen(process.env.PORT, () => console.log("The server ran!"));
