@@ -9,7 +9,7 @@ app.use(express.static(__dirname + 'public'));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    // res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 });
 
@@ -28,7 +28,7 @@ const foodSchema = mongoose.Schema({
 const Food = mongoose.model('Food', foodSchema);
 
 
-app.get('/', function(req, res) {
+app.get('/submit', function(req, res) {
     res.sendFile('index.html');
 });
 
