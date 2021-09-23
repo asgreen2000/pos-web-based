@@ -4,14 +4,13 @@ const mongoose = require('mongoose');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.static(__dirname + 'public'));
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//     // res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-//     next();
-// });
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    // res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+});
 
 const url = "mongodb+srv://admin-asgreen:0353297204@cluster0.aywbz.mongodb.net/foodDB";
 
@@ -28,8 +27,8 @@ const foodSchema = mongoose.Schema({
 const Food = mongoose.model('Food', foodSchema);
 
 
-app.get('/submit', function(req, res) {
-    res.sendFile('index.html');
+app.get('/', function(req, res) {
+    res.sendFile('index.html', {root: __dirname});
 });
 
 app.get('/foods', function(req, res) {
@@ -55,4 +54,4 @@ app.post('/submit' , (req , res)=>{
     )
 });
 
-app.listen(process.env.PORT, () => console.log("The server ran!"));
+app.listen(process.env.PORT | 3000, () => console.log("The server ran!"));
