@@ -6,6 +6,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static(__dirname + 'public'));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+});
+
 const url = "mongodb+srv://admin-asgreen:0353297204@cluster0.aywbz.mongodb.net/foodDB";
 
 mongoose.connect(url);
@@ -26,7 +33,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/foods', function(req, res) {
-    
+
     Food.find({}, (err, result) => {
         res.send(result);
     })
